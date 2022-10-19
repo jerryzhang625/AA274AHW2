@@ -122,20 +122,7 @@ class RRT(object):
             x_near = V[self.find_nearest(V[range(n),:],x_rand)] # Only first n items in V are meaningful
             x_new = self.steer_towards(x_near, x_rand, eps)
             
-            if self.is_free_motion(self.obstacles,x_near,x_new):
-                # Forming the planning tree
-                V[n,:] = x_new # Add new vertex
-                P[n] = self.find_nearest(V[range(n),:],x_rand)
-                # Detect if goal is reached
-                if np.array_equal(x_new, self.x_goal):
-                    # We got it!
-                    success = True
-                    geo_index = n
-                    while geo_index > -1:
-                        self.path.append(V[geo_index,:])
-                        geo_index = P[geo_index]  # Replace current index as its parent until path is populated
-                    break
-                n = n+1
+
         #return False
         ########## Code ends here ##########
 
